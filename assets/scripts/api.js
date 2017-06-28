@@ -1,14 +1,49 @@
 'use strict'
-const ajaxDefaults = {
-  url: 'http://localhost:3000'
+const config = require('./config')
+const store = require('./store')
+
+const signUp = function (data) {
+  //console.log(data)
+  return $.ajax({
+    url: config.apiOrigin + '/sign-up/',
+    method: 'POST',
+    data
+  })
 }
 
-const myRequest = (data, success, fail) => {
-  $.ajax(Object.assign({ method: 'POST', data }, ajaxDefaults))
-  .done(success)
-  .fail(fail)
+const signIn = function (data) {
+  //console.log(data)
+  return $.ajax({
+    url: config.apiOrigin + '/sign-in/',
+    method: 'POST',
+    data
+  })
+}
+const changePassword = function (data) {
+  // console.log('api data is: ', data)
+  // console.log('api data is: ', store)
+  return $.ajax({
+    url: config.apiOrigin + '/change-password/' + store.user.id, // ':id',
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+const signOut = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/sign-out/' + store.user.id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
 }
 
 module.exports = {
-  myRequest
+  signUp,
+  signIn,
+  changePassword,
+  signOut
 }
