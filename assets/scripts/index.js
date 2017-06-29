@@ -59,7 +59,7 @@ const winByRow = function () {
   if (
     $('#box0').text() === $('#box1').text() && $('#box1').text() === $('#box2').text() && $('#box0').text() !== '' ||
     $('#box3').text() === $('#box4').text() && $('#box4').text() === $('#box5').text() && $('#box3').text() !== '' ||
-    $('#box6').text() === $('#box7').text() && $('#box7').text() === $('#box7').text() && $('#box6').text() !== '') {
+    $('#box6').text() === $('#box7').text() && $('#box7').text() === $('#box8').text() && $('#box6').text() !== '') {
     console.log('row')
     return true
   } else {
@@ -86,7 +86,7 @@ const winByDiagonal = function () {
     console.log('diag')
     return true
   } else {
-    return false
+    tieGame()
   }
 }
 
@@ -99,6 +99,18 @@ const winnerLog = function () {
   $('.game-cell').each(function () {
     $(this).text('')
   })
+}
+
+const drawLog = function () {
+  $('#game-text').text('You Both Lose!')
+}
+
+const tieGame = function () {
+  if (turnCount > 8) {
+    drawLog()
+  } else {
+    return false
+  }
 }
 // New Game button, which should reset all squares to have a value of "''" and allow the users to start playing
 $('#new-game-button').on('click', function (event) {
@@ -129,5 +141,7 @@ module.exports = {
   authEvents,
   turnCounter,
   checkForWin,
-  winnerLog
+  winnerLog,
+  tieGame,
+  drawLog
 }
