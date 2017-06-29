@@ -1,0 +1,5 @@
+an x needs to exist
+an O needs to exist
+I need to make an array. I don't know if this should simply 1-9 or if every item should be a square combo i.,e (1,2), (3,3) etc.
+I believe Boolean will need to be used at some point, for example, if x=true than you can't put an o in that box
+Before step 4, an X will need to placed, and I am stuck there, as well.

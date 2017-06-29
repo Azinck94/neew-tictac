@@ -3,18 +3,18 @@ const config = require('./config')
 const store = require('./store')
 
 const signUp = function (data) {
-  //console.log(data)
+  // console.log(data)
   return $.ajax({
-    url: config.apiOrigin + '/sign-up/',
+    url: config.apiOrigins.production + '/sign-up/',
     method: 'POST',
     data
   })
 }
 
 const signIn = function (data) {
-  //console.log(data)
+  // console.log(data)
   return $.ajax({
-    url: config.apiOrigin + '/sign-in/',
+    url: config.apiOrigin.production + '/sign-in/',
     method: 'POST',
     data
   })
