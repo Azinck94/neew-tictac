@@ -3,9 +3,9 @@ const config = require('./config')
 const store = require('./store')
 
 const signUp = function (data) {
-  // console.log(data)
+  console.log(config.apiOrigin)
   return $.ajax({
-    url: config.apiOrigins.production + '/sign-up/',
+    url: config.apiOrigin.development + '/sign-up/',
     method: 'POST',
     data
   })
@@ -14,16 +14,15 @@ const signUp = function (data) {
 const signIn = function (data) {
   // console.log(data)
   return $.ajax({
-    url: config.apiOrigin.production + '/sign-in/',
+    url: config.apiOrigin.development + '/sign-in/',
     method: 'POST',
     data
   })
 }
+
 const changePassword = function (data) {
-  // console.log('api data is: ', data)
-  // console.log('api data is: ', store)
   return $.ajax({
-    url: config.apiOrigin + '/change-password/' + store.user.id, // ':id',
+    url: config.apiOrigin.development + '/change-password/' + store.user.id, // ':id',
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -31,9 +30,10 @@ const changePassword = function (data) {
     data
   })
 }
+
 const signOut = function () {
   return $.ajax({
-    url: config.apiOrigin + '/sign-out/' + store.user.id,
+    url: config.apiOrigin.development + '/sign-out/' + store.user.id,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -41,9 +41,47 @@ const signOut = function () {
   })
 }
 
+const newGame = function (data) {
+  console.log('yo')
+  return $.ajax({
+    url: config.apiOrigin.development + '/games/',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
+const gameTally = function () {
+  console.log('hey')
+  return $.ajax({
+    url: config.apiOrigin.development + '/games',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const updateGame = function (data) {
+  console.log('data is', data)
+  return $.ajax({
+    url: config.apiOrigin.development + '/games' + store.game.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
-  signOut
+  signOut,
+  newGame,
+  gameTally,
+  updateGame
 }

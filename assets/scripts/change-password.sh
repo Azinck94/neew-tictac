@@ -1,6 +1,4 @@
-
-
-curl --include --request PATCH http://localhost:3000/change-password/$ID \
+curl --include --request PATCH https://aqueous-atoll-85096.herokuapp.com/games/$ID \
   --header "Authorization: Token token=$TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
