@@ -6,16 +6,34 @@ const ui = require('./ui')
 const store = require('./store')
 
 const onSignUp = function (event) {
-  console.log('hi')
+  $('#game-log').text('Signed Up!')
   const data = getFormFields(this)
   event.preventDefault()
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
 }
+const stats = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games/',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const getStats = function (event) {
+  stats()
+  .then(function (data) {
+    $('#game-log').text(data.games.length)
+  })
+  .catch(function (data) {
+  })
+}
 
 const onSignIn = function (event) {
-  console.log('hi')
+  $('#game-log').text('Signed In!')
   const data = getFormFields(this)
   event.preventDefault()
   api.signIn(data)
@@ -35,14 +53,9 @@ const onChangePassword = function (event) {
 
 const onSignOut = function (event) {
   event.preventDefault()
-
   api.signOut()
-    .then(function () {
-      delete store.user
-      return store
-    })
-    .then(ui.signOutSuccess)
-    .catch(ui.signOutFail)
+      .then(ui.signOutSuccess)
+      .catch(ui.signOutFailure)
 }
 
 const addHandlers = () => {
@@ -104,5 +117,6 @@ module.exports = {
   onSignOut,
   addHandlers,
   getGameUpdates,
-  onUpdateGame
+  onUpdateGame,
+  getStats
 }

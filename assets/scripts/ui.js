@@ -30,6 +30,9 @@ const signOutSuccess = function () {
   store.user = null
   console.log(store.user)
 }
+const signOutFail = function () {
+  console.log('sign out failed')
+}
 
 const changePasswordSuccess = function () {
   console.log('Password Successfully Changed.')
@@ -52,6 +55,7 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   signOutSuccess,
+  signOutFail,
   newGameSuccess,
   updateGameSuccess,
   updateGameFailure

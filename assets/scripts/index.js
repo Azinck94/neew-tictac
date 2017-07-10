@@ -92,9 +92,9 @@ const winByDiagonal = function () {
 
 const winnerLog = function () {
   if (turnCount % 2 === 0) {
-    $('#game-text').text('Player 1 Wins')
-  } else {
     $('#game-text').text('Player 2 Wins')
+  } else {
+    $('#game-text').text('Player 1 Wins')
   }
   $('.game-cell').each(function () {
     $(this).text('')
@@ -127,11 +127,18 @@ $('#new-game-button').on('click', function (event) {
   })
 })
 
+$('#list-all-games').on('click', function (event) {
+  event.preventDefault()
+  const data = {}
+  api.newGame(data)
+  $('#game-log').text(data.games.length)
+})
 const authEvents = require('./events.js')
 
 $(() => {
   authEvents.addHandlers()
 })
+
 $('#list-all-games').on('click', events.getGameUpdates)
 
 $('#gameActionButton').on('click', events.getGameUpdates)

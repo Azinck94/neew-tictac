@@ -32,6 +32,7 @@ const changePassword = function (data) {
 }
 
 const signOut = function () {
+  console.log('hey')
   return $.ajax({
     url: config.apiOrigin.development + '/sign-out/' + store.user.id,
     method: 'DELETE',

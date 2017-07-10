@@ -1,4 +1,4 @@
-curl "https://aqueous-atoll-85096.herokuapp.com" \
+curl "http://tic-tac-toe.wdibos.com" \
   --include \
   --request POST \
   --data-urlencode "credentials[email]=$EMAIL" \
