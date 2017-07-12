@@ -42,7 +42,9 @@ const onSignIn = function (event) {
     .catch(ui.signInFailure)
   $('#game-board').fadeIn(500).css('display', 'block')
 }
-
+const onNewGame = function (event) {
+  $('#game-board').show()
+}
 const onChangePassword = function (event) {
   event.preventDefault()
   console.log('hi')
@@ -62,9 +64,12 @@ const onSignOut = function (event) {
 }
 
 const addHandlers = () => {
+  $('#game-board').hide()
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
+  $('#new-game-button').on('submit', onNewGame)
   $('#change-password').on('submit', onChangePassword)
+  $('#sign-out').on('submit', onSignOut)
 }
 
 // const createNewGame = function (onSignIn) {
@@ -121,5 +126,6 @@ module.exports = {
   addHandlers,
   getGameUpdates,
   onUpdateGame,
-  getStats
+  getStats,
+  onNewGame
 }

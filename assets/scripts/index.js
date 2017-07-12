@@ -139,6 +139,7 @@ const stats = function () {
 const store = require('./store')
 
 $('#list-all-games').on('click', function (event) {
+  console.log('dude')
   stats()
   event.preventDefault()
   const data = {}
@@ -149,11 +150,15 @@ const authEvents = require('./events.js')
 
 $(() => {
   authEvents.addHandlers()
+  $('#game-board').hide
+  $('#list-all-games').on('click', events.getGameUpdates)
+  $('#gameActionButton').on('click', events.getGameUpdates)
+  $()
 })
 
-$('#list-all-games').on('click', events.getGameUpdates)
-
-$('#gameActionButton').on('click', events.getGameUpdates)
+// $('#list-all-games').on('click', events.getGameUpdates)
+//
+// $('#gameActionButton').on('click', events.getGameUpdates)
 
 module.exports = {
   turnCount,
