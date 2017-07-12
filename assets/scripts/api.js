@@ -45,7 +45,7 @@ const signOut = function () {
 const newGame = function (data) {
   console.log('yo')
   return $.ajax({
-    url: config.apiOrigin.development + '/games/',
+    url: config.apiOrigin.development + '/games',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -76,7 +76,16 @@ const updateGame = function (data) {
     data
   })
 }
-
+const showGames = function (data) {
+  return $.ajax({
+    url: config.apiOrigin + '/games?over=true',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
 module.exports = {
   signUp,
   signIn,
@@ -84,5 +93,6 @@ module.exports = {
   signOut,
   newGame,
   gameTally,
-  updateGame
+  updateGame,
+  showGames
 }

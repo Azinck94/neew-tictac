@@ -4,6 +4,7 @@ const getFormFields = require(`../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
+const config = require('./config.js')
 
 const onSignUp = function (event) {
   $('#game-log').text('Signed Up!')
@@ -39,6 +40,7 @@ const onSignIn = function (event) {
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
+  $('#game-board').fadeIn(500).css('display', 'block')
 }
 
 const onChangePassword = function (event) {
@@ -56,6 +58,7 @@ const onSignOut = function (event) {
   api.signOut()
       .then(ui.signOutSuccess)
       .catch(ui.signOutFailure)
+  $('#game-board').fadeOut(500).css('display', 'none')
 }
 
 const addHandlers = () => {

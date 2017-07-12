@@ -115,6 +115,7 @@ const tieGame = function () {
 // New Game button, which should reset all squares to have a value of "''" and allow the users to start playing
 $('#new-game-button').on('click', function (event) {
   event.preventDefault()
+  console.log('What the F did i do')
   const data = {}
   api.newGame(data)
     .then(ui.newGameSuccess)
@@ -126,8 +127,19 @@ $('#new-game-button').on('click', function (event) {
     $(this).text('')
   })
 })
+const stats = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games/',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+const store = require('./store')
 
 $('#list-all-games').on('click', function (event) {
+  stats()
   event.preventDefault()
   const data = {}
   api.newGame(data)
