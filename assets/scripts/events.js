@@ -14,6 +14,7 @@ const onSignUp = function (event) {
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
 }
+
 const stats = function () {
   return $.ajax({
     url: config.apiOrigin + '/games/',
@@ -70,6 +71,7 @@ const addHandlers = () => {
   $('#new-game-button').on('submit', onNewGame)
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
+  $('#list-all-games').on('submit', getGameUpdates)
 }
 
 // const createNewGame = function (onSignIn) {

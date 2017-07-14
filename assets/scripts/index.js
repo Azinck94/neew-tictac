@@ -144,7 +144,7 @@ $('#list-all-games').on('click', function (event) {
   event.preventDefault()
   const data = {}
   api.newGame(data)
-  $('#game-log').text(data.games.length)
+  $('#game-log').text(data.games)
 })
 const authEvents = require('./events.js')
 

@@ -54,7 +54,7 @@ const newGame = function (data) {
   })
 }
 
-const gameTally = function () {
+const gameTally = function (data) {
   console.log('hey')
   return $.ajax({
     url: config.apiOrigin.development + '/games',
