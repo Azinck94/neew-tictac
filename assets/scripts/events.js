@@ -15,25 +15,6 @@ const onSignUp = function (event) {
     .catch(ui.signUpFailure)
 }
 
-const stats = function () {
-  return $.ajax({
-    url: config.apiOrigin + '/games/',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
-
-const getStats = function (event) {
-  stats()
-  .then(function (data) {
-    $('#game-log').text(data.games.length)
-  })
-  .catch(function (data) {
-  })
-}
-
 const onSignIn = function (event) {
   $('#game-log').text('Signed In!')
   const data = getFormFields(this)
@@ -73,7 +54,19 @@ const addHandlers = () => {
   $('#sign-out').on('submit', onSignOut)
   $('#list-all-games').on('submit', getGameUpdates)
 }
-
+const getGameUpdates = function (stats) {
+  event.preventDefault()
+  console.log(data)
+  stats()
+    .then(function (data) {
+      $('#list-games-log').val(data.games.length)
+      console.log(data)
+      console.log('Success')
+    })
+    .catch(function (data) {
+      console.log('Nope')
+    })
+}
 // const createNewGame = function (onSignIn) {
 //   event.preventDefault()
 //   let data = {}
@@ -81,19 +74,14 @@ const addHandlers = () => {
 //     .done(ui.onSuccess)
 //     .fail(ui.onError)
 // }
-
-const getGameUpdates = function () {
-  event.preventDefault()
-  // console.log(store.game.id)
-  api.gameTally()
-    .then(function (data) {
-      console.log(data)
-      console.log('Success')
-      store.game = data.game
-    })
-    .catch(function (data) {
-      console.log('Nope')
-    })
+const stats = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games/',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
 }
 
 const onUpdateGame = function (letter, index, gameOver) {
@@ -126,8 +114,8 @@ module.exports = {
   onSignIn,
   onSignOut,
   addHandlers,
-  getGameUpdates,
   onUpdateGame,
-  getStats,
+  stats,
   onNewGame
 }
+
