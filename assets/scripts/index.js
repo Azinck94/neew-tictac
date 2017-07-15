@@ -139,20 +139,46 @@ const stats = function () {
 const store = require('./store')
 
 $('#list-all-games').on('click', function (event) {
-  console.log('dude')
-  stats()
   event.preventDefault()
+  console.log('dude')
   const data = {}
+  event.preventDefault()
   api.newGame(data)
   $('#game-log').text(data.games)
 })
+$('#new-game-button').on('click', function (event) {
+  event.preventDefault()
+  console.log('What the F did i do')
+  const data = {}
+  api.newGame(data)
+    .then(ui.newGameSuccess)
+    .catch(ui.failure)
+  $('#game-text').text('New game!')
+  turnCount = 0
+  // Create an array to represent the game-board
+  $('.game-cell').each(function () {
+    $(this).text('')
+  })
+})
+const getGameUpdates = function (stats) {
+  event.preventDefault()
+  console.log(data)
+  stats()
+    .then(function (data) {
+      $('#list-games-log').val(data.games.length)
+      console.log(data)
+      console.log('Success')
+    })
+    .catch(function (data) {
+      console.log('Nope')
+    })
+}
 const authEvents = require('./events.js')
 
 $(() => {
   authEvents.addHandlers()
   $('#game-board').hide
   $('#list-all-games').on('click', events.getGameUpdates)
-  $('#gameActionButton').on('click', events.getGameUpdates)
   $()
 })
 
@@ -167,5 +193,6 @@ module.exports = {
   checkForWin,
   winnerLog,
   tieGame,
-  drawLog
+  drawLog,
+  getGameUpdates
 }
